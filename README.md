@@ -60,7 +60,7 @@ export R_LIBS="$starting_location/R_scripts/packages"
 R_programs=$starting_location/R_scripts 
 ```
 #### Preprocessing 
-The first steps in analyzing metatranscriptomics data will be the preprocessing of reads or reads QC to remove low-quality data. In SANSA pipeline, if performed paired-end sequencing, reads must be merged and filtered to remove low-quality reads and adaptor contamination. 
+The first steps in analyzing metatranscriptomics data will be the preprocessing of reads or reads QC to remove low-quality data. In SAMSA pipeline, if performed paired-end sequencing, reads must be merged and filtered to remove low-quality reads and adaptor contamination. 
 
 - Paired-end read merging 
 If paired-end sequencing was performed, there will be two FASTQ sequence files for each sample provided; Sample names have “R1” and “R2”.  R1 contains the forward reads, while R2 contains the reverse reads.   
