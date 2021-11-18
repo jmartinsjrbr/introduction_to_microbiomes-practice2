@@ -3,7 +3,7 @@
 ### Metatranscriptomics: Metatranscriptome analysis using Sequence Annotation (SAMSA2) Pipeline 
 
  
-##![image](https://user-images.githubusercontent.com/11639261/141863319-65a37b17-11a6-4573-a229-d24b0d511537.png)
+![image](https://user-images.githubusercontent.com/11639261/141863319-65a37b17-11a6-4573-a229-d24b0d511537.png)
 
 #### Example Files and Workflow 
 For this practical demonstration we are going to use sample files provided with SAMSA 2. These files can be found in the folder: *~/omics_course/progs/samsa2/sample_files_paired-end/1_starting_files*
@@ -23,7 +23,7 @@ cp -r ~/omics_course/progs/samsa2/sample_files_paired-end/1_starting_files/*.fas
 - Setup pathways
 ```
 #!/bin/bash
-Setup pathways 
+#Setup pathways 
 
 # VARIABLES - Set pathway for starting_location to location of samsa2  
 #0. Set starting location: 
@@ -205,7 +205,11 @@ Note, however, that the SEED Subsystems database is not readily downloadable in 
 
 - Annotating a file against a DIAMOND database 
 ```
+diamond blastx --db $diamond_database -q $filename -f 6 -o $diamond_output  -k 1  
+```
+
 For demonstration purpose we will use a TINY version of RefSeq and Subsystems database. 
+```
 for file in $starting_files_location/step_3_output/*ribodepleted.fastq 
 do 
      name=`echo $file | awk -F "ribodepleted" '{print $1 "RefSeq_annotated"}'` 
@@ -215,8 +219,6 @@ done
 
 mkdir $starting_files_location/step_4_output/ 
 mv $starting_files_location/step_3_output/*annotated* $starting_files_location/step_4_output/ 
-
-diamond blastx --db $diamond_database -q $filename -f 6 -o $diamond_output  -k 1  
 ```
 The resulting data table is ready for step 3 in the SAMSA pipeline: **aggregation**. 
 
@@ -251,7 +253,11 @@ do
   python3 $python_programs/standardized_DIAMOND_analysis_counter.py -I $file -D $RefSeq_db -O 
   python3 $python_programs/standardized_DIAMOND_analysis_counter.py -I $file -D $RefSeq_db -F 
 done 
+```
 
+Move the results to a new folder
+
+```
 mkdir $starting_files_location/step_5_output/ 
 mkdir $starting_files_location/step_5_output/RefSeq_results/ 
 mkdir $starting_files_location/step_5_output/RefSeq_results/org_results/ 
@@ -298,7 +304,7 @@ Two statistics, Shannon and Simpson diversity, can provide a useful overview of 
 Rscript $R_programs/diversity_stats.R -I $starting_files_location/step_5_output/RefSeq_results/org_results/ 
 Rscript $R_programs/diversity_graphs.R -I $starting_files_location/step_5_output/RefSeq_results/org_results/ 
 
-evince $starting_files_location/step_5_output/RefSeq_results/org_results/ diversity_graph.pdf 
+evince $starting_files_location/step_5_output/RefSeq_results/org_results/diversity_graph.pdf 
 ```
 
 **Result:** “diversity_stats.R” will return the mean Shannon and Simpson diversities for both the control and experimental groups.   
@@ -312,7 +318,7 @@ evince $starting_files_location/step_5_output/RefSeq_results/org_results/ divers
 A stacked graph showing the top organisms (or functions) within all metatranscriptomes in a project provides a useful overview of results. “make_combined_graphs.R” is an R script that creates these graphs for either the top most abundant organisms or functions.  Similar to the above R programs, it reads in summaries of all metatranscriptome files and generates a stacked bar graph from this data. 
 
 Rscript $R_programs/make_combined_graphs.R -D $starting_files_location/step_5_output/RefSeq_results/org_results/ 
-evince $starting_files_location/step_5_output/RefSeq_results/org_results/ combined_graph.pdf 
+evince $starting_files_location/step_5_output/RefSeq_results/org_results/combined_graph.pdf 
 
 **Result:** “make_combined_graphs.R” will generate a PDF containing two stacked bar graphs; the top bar graph will reveal relative expression (in percentages), while the lower bar graph will reveal absolute expression (count numbers).  A legend is displayed beneath.  Control samples are displayed on the left, while experimental samples are displayed on the right.  Each bar represents a single metatranscriptome input file. 
 
@@ -388,7 +394,10 @@ do
   python3 $python_programs/DIAMOND_subsystems_analysis_counter.py -I $file -D $Subsys_db -O $file.hierarchy -P $file.receipt 
   python3 $python_programs/subsys_reducer.py -I $file.hierarchy 
 done 
+```
 
+Move the results to a new folder
+```
 mkdir $starting_files_location/step_5_output/Subsystems_results/ 
 mkdir $starting_files_location/step_5_output/Subsystems_results/receipts/ 
 
