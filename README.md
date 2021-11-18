@@ -74,6 +74,14 @@ To use PEAR for merging two paired-end reads, run it from the command line, usin
 ```
 ./pear –help | less 
 ```
+Run pear with the first sample:
+```
+$pear_location/pear \ 
+-f $starting_files_location/control_1_TINY_R1.fastq \ 
+-r $starting_files_location/control_1_TINY_R2.fastq \ 
+-o control_1_TINY_merged 
+```
+ 
 - Make a script to run all files 
 ```
 cd $starting_files_location 
