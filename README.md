@@ -224,7 +224,7 @@ The resulting data table is ready for step 3 in the SAMSA pipeline: **aggregatio
 
 #### Aggregation 
 
-Now that each metatranscriptome file has been annotated, the next step is to reduce the results down into a condensed and simplified format for statistical analysis.  DIAMOND returns the best match for each read in the starting file that meets its parameters for sequence specificity, much like a line-item receipt from a grocery store.  This step converts this large file into a condensed, sorted summary table that returns the total number of hits to each specific organism or function. 
+Now that each metatranscriptome file has been annotated, the next step is to reduce the results down into a condensed and simplified format for statistical analysis.  DIAMOND returns the best match for each read in the starting file that meets its parameters for sequence specificit.  This step converts this large file into a condensed, sorted summary table that returns the total number of hits to each specific organism or function. 
 
 NOTE: This step will create two summary files for each starting metatranscriptome; one file will contain annotations grouped by organism (all Bacteroides reads will be grouped together), while the other file will contain annotations grouped by function (all reads coding for the enzyme lactase will be grouped together).  Later steps will document the steps necessary to perform a search for all functions expressed by a specific organism or group of organisms, or vice versa, all organisms performing a specific function or set of functions. 
 
